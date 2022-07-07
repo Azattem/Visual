@@ -35,7 +35,7 @@ public class VisualDraw {
                 z = new Complex(x, y);
                 System.out.println(z.x+" "+z.y);
                 int color = getColor(z);
-                System.out.println(colors256[color]);
+                //System.out.println(colors256[color]);
                 canvas.getGraphicsContext2D().getPixelWriter().setColor(i,j,colors256[color]);
             }
         }
