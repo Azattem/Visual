@@ -1,49 +1,80 @@
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
-import java.util.HashMap;
 
 public class VisualDraw {
-private static HashMap<Character,Color> SymbolCatalog = new HashMap<>();
-private Color[][] VisualMatrix;
+    private Canvas canvas;
+    private int width;
+    private int height;
+    private double x0;
+    private double y0;
+    private double scale;
+    private double lenghtX0 = 1 * scale;
+    private double lenghtY0 = 1 * scale;
+    VisualDraw( Canvas canvas){
+    this.canvas = canvas;
+        System.out.println((int)canvas.getWidth());
+    this.width = (int)canvas.getWidth();
+    this.height = (int)canvas.getHeight();
+    this.x0 = (width / 2);
+    this.y0 = (height / 2);
 
-VisualDraw(char[][] Matrix){
-        VisualMatrix = ConvertMatrix(Matrix);
-}
+    }
+    public void UpdateScale(double Scale){
+    scale = Math.min(height,width)/Scale;
+    }
 
-private Color[][] ConvertMatrix(char[][] SymbolMatrix){
-Color[][] Matrix = new Color[SymbolMatrix.length][SymbolMatrix[0].length];
-    for (int i = 0; i < SymbolMatrix.length; i++) {
-        for (int j = 0; j < SymbolMatrix[0].length; j++) {
-            System.out.println(i+" "+j);
-        char Symbol = SymbolMatrix[i][j];
-        if(!SymbolCatalog.containsKey(Symbol)){
-        while (true){
-            System.out.println("1");
-            Color s = Color.rgb(random(0,255),random(0,255),random(0,255));
-            if(!SymbolCatalog.containsValue(s)) {
-                SymbolCatalog.put(SymbolMatrix[i][j], s);
-                break;
+    public void Update(){
+        Complex z;
+        Color[]colors256=colorArray();
+        for (int i = 1; i < width - 1; i++) {
+            for (int j = 1; j < height - 1; j++) {
+                double x = (i - x0) / lenghtX0;
+                double y = (j - y0) / lenghtY0;
+                System.out.println(x+" "+y);
+                z = new Complex(x, y);
+                System.out.println(z.x+" "+z.y);
+                int color = getColor(z);
+                System.out.println(colors256[color]);
+                canvas.getGraphicsContext2D().getPixelWriter().setColor(i,j,colors256[color]);
             }
         }
+    }
+    public void SetDismensions(int x,int y){
+    this.x0 = (width / 2+x);
+    this.y0 = (height / 2+y);
+    }
+    private static Color[] colorArray() {
+        int red[] = {0, 36, 73, 109, 146, 182, 219, 255};
+        int green[] = red;
+        int blue[] = {0, 85, 170, 255};
+        Color colors256[] = new Color[256];
+        int m = 0;
+
+        for (int i = 0; i < 8; i++) {
+
+            for (int j = 0; j < 8; j++) {
+
+                for (int k = 0; k < 4; k++) {
+                    System.out.println(red[i]+" "+green[j]+" "+blue[k]);
+                    colors256[m++] = Color.rgb(red[i], green[j], blue[k]);
+
+                }
+            }
         }
-        Matrix[i][j] = SymbolCatalog.get(SymbolMatrix[i][j]);
+        return colors256;
+    }
+    private static int getColor(Complex z0) {
+        Complex z = z0;
+
+        for (int i = 255; i > 1; i--) {
+            if (z.abs() > 2) {
+                return i;
+            }
+            z = z.mul(z).add(z0);
         }
-    }
-return  Matrix;
-}
 
-private int random(int min, int max) {
-        int range = (max - min) + 1;
-        return (int)(Math.random() * range) + min;
+        return 0;
     }
 
-public void Stamp(Canvas g){
-for (int i = 0; i < VisualMatrix.length; i++) {
-    for (int j = 0; j < VisualMatrix[0].length; j++) {
-        g.getGraphicsContext2D().getPixelWriter().setColor(i,j,VisualMatrix[i][j]);
-    }
 }
-}
-}
-

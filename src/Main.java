@@ -6,8 +6,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     private Stage stage;
-    private int height = 600;
-    private int width = 900;
     public static void main(String[] args) {
         launch(args);
     }
@@ -18,7 +16,6 @@ public class Main extends Application {
         this.stage = stage;
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setWidth(width);
-        stage.setHeight(height);
+
     }
 }
