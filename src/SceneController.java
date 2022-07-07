@@ -13,11 +13,11 @@ public class SceneController {
     public void Update() {
         int width = 400;
         int height = 400;
-        double x0 = (width / 2);
-        double y0 = (height / 2);
+        double x0 = (width / GetScaleX());
+        double y0 = (height / GetScaleY());
         double scale = GetScale();
-        double lenghtX0 = GetScaleX() * scale;
-        double lenghtY0 = GetScaleY() * scale;
+        double lenghtX0 = 1* scale;
+        double lenghtY0 = 1 * scale;
         ConsolDraw c = new ConsolDraw(width, height);
         Complex z;
         for (int i = 1; i < width - 1; i++) {
