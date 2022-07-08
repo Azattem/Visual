@@ -63,63 +63,21 @@ public class VisualDraw {
         RGBPalitre = UpdateRGB;
     }
 
-    public void updateXY(int approxBox, double x0Mem, double y0Mem) {
-        int shiftX = 0;
-        int shiftY = 0;
-        boolean reset = false;
 
-        int shiftXdelta = width /shiftKoef;
-        int shiftYdelta = height / shiftKoef;
-        switch (approxBox) {
-            case (1):
-                shiftX = shiftXdelta;
-                shiftY = shiftYdelta;
-                break;
-            case (2):
-                shiftY = shiftYdelta;
-                break;
-            case (3):
-                shiftX = -shiftXdelta;
-                shiftY = shiftYdelta;
-                break;
-            case (4):
-                shiftX = shiftXdelta;
-                break;
-            case (5):
-                reset = true;
-                break;
-            case (6):
-                shiftX = -shiftXdelta;
 
-                break;
-            case (7):
-                shiftX = shiftXdelta;
-                shiftY = -shiftYdelta;
-                break;
-            case (8):
-                shiftY = -shiftYdelta;
-                break;
-            case (9):
-                shiftX = -shiftXdelta;
-                shiftY = -shiftYdelta;
-                break;
-        }
+    public void updateMouseXYStay(double mouseX, double mouseY, double x0Mem, double y0Mem) {
 
-        x0 = x0Mem + shiftX;
-        y0 = y0Mem + shiftY;
-        if (reset == true) {
-            reset = false;
-            updateScale(0.5);
-            x0 = (width / 6) * 3;
-            y0 = (height / 6) * 3;
-        }
+        x0 = x0Mem;
+        y0 = y0Mem;
+
+
     }
+    public void updateMouseXY(double mouseX, double mouseY, double x0Mem, double y0Mem) {
+
+        x0 = x0Mem+(width/2-mouseX);
+        y0 = y0Mem+(height/2-mouseY);
 
 
-
-    public void setDismensions(int x, int y) {
-        this.x0 = (width / 2) + x;
-        this.y0 = (height / 2) + y;
     }
 
 
@@ -153,7 +111,6 @@ public class VisualDraw {
 
     }
 
-    public void setPaletteKoef(int paletteKoef) {
-        this.paletteKoef = paletteKoef;
-    }
+
+
 }
