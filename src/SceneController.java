@@ -1,6 +1,7 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class SceneController {
     @FXML
@@ -18,8 +19,8 @@ public class SceneController {
 
 
 
-
-
+    //Mouseevent позволяет получить кординаты мышки при нажатие оформляеться как написанно ниже, образаеясь к пременой e там есть методы для получения кардинат
+    //public void update(MouseEvent e) {
     public void update() {
 
         VisualDraw draw = new VisualDraw(Canvas);
