@@ -7,10 +7,12 @@ public class SceneController {
     public TextField Scale;
     public TextField Scalex;
     public TextField Scaley;
-    public static double x0Mem;
-    public static double y0Mem;
-    public static int RGBPalitre = 2;
-    public static int approxBox = 0;
+    public TextField Shift;
+    public TextField PaletteKoef;
+    private static double x0Mem;
+    private static double y0Mem;
+    private static int RGBPalitre = 2;
+    private static int approxBox = 0;
     private static boolean noFirstRun=false;
     public javafx.scene.canvas.Canvas Canvas;
 
@@ -21,8 +23,9 @@ public class SceneController {
     public void update() {
 
         VisualDraw draw = new VisualDraw(Canvas);
-       draw.updateScale(getScale());
+        draw.updateScale(getScale());
         draw.updateRGB(RGBPalitre);
+        draw.setShiftKoef(Integer.parseInt(Shift.getText()));
         if(noFirstRun){
             draw.updateXY(approxBox,x0Mem,y0Mem);
             approxBox=0;
@@ -43,25 +46,28 @@ public class SceneController {
         }
     }
 
-    private void changeScaleX(int s) {
-        Scalex.setText((Integer.parseInt(Scalex.getText()) + s) + "");
-    }
-
-    private void changeScaleY(int s) {
-        Scaley.setText((Integer.parseInt(Scaley.getText()) + s) + "");
-    }
 
     private double getScale() {
         return Double.parseDouble(Scale.getText());
     }
 
-    private int getScaleX() {
-        return Integer.parseInt(Scalex.getText());
+      @FXML
+    private void shiftIncrease(ActionEvent actionEvent) {
+        int currentScale=Integer.parseInt(Shift.getText());
+        if (currentScale <5){
+            Shift.setText(currentScale +1 + "");
+            update();
+        }
+
+    }@FXML
+    private void shiftDecrease(ActionEvent actionEvent) {
+        int currentScale=Integer.parseInt(Shift.getText());
+        if (Integer.parseInt(Shift.getText()) >1){
+            Shift.setText(currentScale -1 + "");
+            update();
+        }
     }
 
-    private int getScaleY() {
-        return Integer.parseInt(Scaley.getText());
-    }
 
     @FXML
     private void approx1(ActionEvent actionEvent) {
@@ -105,64 +111,25 @@ public class SceneController {
         update();
     }
     @FXML
-    private void increase(ActionEvent actionEvent) {
+    private void increase1(ActionEvent actionEvent) {
         changeScale(1);
     }
 
     @FXML
-    private void decrease(ActionEvent actionEvent) {
+    private void decrease1(ActionEvent actionEvent) {
         changeScale(-1);
     }
 
     @FXML
-    private void increase1(ActionEvent actionEvent) {
+    private void increase10(ActionEvent actionEvent) {
         changeScale(+10);
     }
 
     @FXML
-    private void decrease1(ActionEvent actionEvent) {
+    private void decrease10(ActionEvent actionEvent) {
         changeScale(-10);
     }
 
-    @FXML
-    private void increaseX(ActionEvent actionEvent) {
-        changeScaleX(1);
-    }
-
-    @FXML
-    private void decreaseX(ActionEvent actionEvent) {
-        changeScaleX(-1);
-    }
-
-    @FXML
-    private void increase10X(ActionEvent actionEvent) {
-        changeScaleX(+10);
-    }
-
-    @FXML
-    private void decrease10X(ActionEvent actionEvent) {
-        changeScaleX(-10);
-    }
-
-    @FXML
-    private void increaseY(ActionEvent actionEvent) {
-        changeScaleY(1);
-    }
-
-    @FXML
-    private void decreaseY(ActionEvent actionEvent) {
-        changeScaleY(-1);
-    }
-
-    @FXML
-    private void increase10Y(ActionEvent actionEvent) {
-        changeScaleY(+10);
-    }
-
-    @FXML
-    private void decrease10Y(ActionEvent actionEvent) {
-        changeScaleY(-10);
-    }
 
     @FXML
     private void RGBChange(ActionEvent actionEvent) {

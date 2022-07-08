@@ -10,6 +10,8 @@ public class VisualDraw {
     private double y0;
     private double scale;
 
+    private int shiftKoef;
+
     private int paletteKoef;
     private int paletteSize;
     private int RGBPalitre;
@@ -21,10 +23,37 @@ public class VisualDraw {
         this.x0 = (width / 6) * 3;
         this.y0 = (height / 6) * 3;
         this.RGBPalitre = 2;
-        this.paletteKoef = 4;//min=2;max=256
+        this.paletteKoef = 8;//min=2;max=256
         this.paletteSize = paletteKoef * paletteKoef * (paletteKoef / 2);
+        this.shiftKoef=3;
     }
+    public void update() {
+        Complex z;
+        Color[] colorArray = ColorArray.colorArray(paletteKoef, RGBPalitre);
+        for (int i = 1; i < width - 1; i++) {
+            for (int j = 1; j < height - 1; j++) {
+                double x = (i - x0) / scale;
+                double y = (j - y0) / scale;
+                z = new Complex(x, y);
 
+                int color = getColor(z, paletteSize);
+
+                    canvas.getGraphicsContext2D().getPixelWriter().setColor(i, j, colorArray[color]);
+
+
+
+                if (i == width / 3 || i == (width / 3) * 2) {
+                    canvas.getGraphicsContext2D().getPixelWriter().setColor(i, j, Color.GRAY);
+                }
+                if (j == height / 3 || j == (height / 3) * 2) {
+                    canvas.getGraphicsContext2D().getPixelWriter().setColor(i, j, Color.GRAY);
+                }
+
+
+            }
+        }
+
+    }
     public void updateScale(double Scale) {
         scale = (Math.min(height, width) / 2) * Scale;
     }
@@ -38,8 +67,9 @@ public class VisualDraw {
         int shiftX = 0;
         int shiftY = 0;
         boolean reset = false;
-        int shiftXdelta = width / 3;
-        int shiftYdelta = height / 3;
+
+        int shiftXdelta = width /shiftKoef;
+        int shiftYdelta = height / shiftKoef;
         switch (approxBox) {
             case (1):
                 shiftX = shiftXdelta;
@@ -79,36 +109,13 @@ public class VisualDraw {
         y0 = y0Mem + shiftY;
         if (reset == true) {
             reset = false;
+            updateScale(0.5);
             x0 = (width / 6) * 3;
             y0 = (height / 6) * 3;
         }
     }
 
-    public void update() {
-        Complex z;
-        Color[] colorArray = ColorArray.colorArray(paletteKoef, RGBPalitre);
-        for (int i = 1; i < width - 1; i++) {
-            for (int j = 1; j < height - 1; j++) {
-                double x = (i - x0) / scale;
-                double y = (j - y0) / scale;
-                z = new Complex(x, y);
 
-                int color = getColor(z, paletteSize);
-                canvas.getGraphicsContext2D().getPixelWriter().setColor(i, j, colorArray[color]);
-
-
-                if (i == width / 3 || i == (width / 3) * 2) {
-                    canvas.getGraphicsContext2D().getPixelWriter().setColor(i, j, Color.GRAY);
-                }
-                if (j == height / 3 || j == (height / 3) * 2) {
-                    canvas.getGraphicsContext2D().getPixelWriter().setColor(i, j, Color.GRAY);
-                }
-
-
-            }
-        }
-
-    }
 
     public void setDismensions(int x, int y) {
         this.x0 = (width / 2) + x;
@@ -135,5 +142,18 @@ public class VisualDraw {
 
     public double getY0() {
         return y0;
+    }
+
+    public int getShiftKoef() {
+        return shiftKoef;
+    }
+
+    public void setShiftKoef(int Koef) {
+        this.shiftKoef = 7-Koef;
+
+    }
+
+    public void setPaletteKoef(int paletteKoef) {
+        this.paletteKoef = paletteKoef;
     }
 }
