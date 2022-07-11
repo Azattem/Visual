@@ -5,30 +5,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0"  xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SceneController">
    <children>
-      <Canvas fx:id="Canvas" height="600.0" onMouseClicked="#update" width="800.0" />
-      <TextField fx:id="Scale" editable="false" layoutX="810.0" layoutY="27.0" prefHeight="25.0" prefWidth="100.0" text="0.5" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="27.0" />
-      <Button layoutX="870.0" layoutY="79.0" mnemonicParsing="false" onAction="#decrease1" prefHeight="25.0" prefWidth="40.0" text="-1" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="79.0" />
-      <Button layoutX="870.0" layoutY="54.0" mnemonicParsing="false" onAction="#increase1" prefHeight="25.0" prefWidth="40.0" text="+1" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="54.0" />
-      <Button layoutX="810.0" layoutY="79.0" mnemonicParsing="false" onAction="#decrease10" prefHeight="25.0" prefWidth="60.0" text="-10" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="79.0" />
-      <Button layoutX="810.0" layoutY="54.0" mnemonicParsing="false" onAction="#increase10" prefHeight="25.0" prefWidth="60.0" text="+10" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="54.0" />
-      <Button layoutX="812.0" layoutY="191.0" mnemonicParsing="false" onAction="#approx1" prefHeight="25.0" prefWidth="25.0" text="\\" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="191.0" />
-      <Button layoutX="847.0" layoutY="191.0" mnemonicParsing="false" onAction="#approx2" prefHeight="25.0" prefWidth="25.0" text="|" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="191.0" />
-      <Button layoutX="882.0" layoutY="191.0" mnemonicParsing="false" onAction="#approx3" prefHeight="25.0" prefWidth="25.0" text="/" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="191.0" />
-      <Button layoutX="812.0" layoutY="226.0" mnemonicParsing="false" onAction="#approx4" prefHeight="25.0" prefWidth="25.0" text="-" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="226.0" />
-      <Button layoutX="847.0" layoutY="226.0" mnemonicParsing="false" onAction="#approx5" prefHeight="25.0" prefWidth="25.0" text="R" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="226.0" />
-      <Button layoutX="882.0" layoutY="226.0" mnemonicParsing="false" onAction="#approx6" prefHeight="25.0" prefWidth="25.0" text="-" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="226.0" />
-      <Button layoutX="812.0" layoutY="261.0" mnemonicParsing="false" onAction="#approx7" prefHeight="25.0" prefWidth="25.0" text="/" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="261.0" />
-      <Button layoutX="847.0" layoutY="261.0" mnemonicParsing="false" onAction="#approx8" prefHeight="25.0" prefWidth="25.0" text="|" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="261.0" />
-      <Button layoutX="882.0" layoutY="261.0" mnemonicParsing="false" onAction="#approx9" prefHeight="25.0" prefWidth="25.0" text="\\" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="261.0" />
+      <Canvas fx:id="Canvas" height="600.0" onMouseClicked="#updateMouse" width="800.0" />
+      <TextField fx:id="Scale" editable="false" layoutX="810.0" layoutY="27.0" prefHeight="25.0" prefWidth="100.0" text="100" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="27.0" />
+      <Button layoutX="870.0" layoutY="79.0" mnemonicParsing="false" onAction="#decrease10" prefHeight="25.0" prefWidth="40.0" text="-10" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="79.0" />
+      <Button layoutX="870.0" layoutY="54.0" mnemonicParsing="false" onAction="#increase10" prefHeight="25.0" prefWidth="40.0" text="+10" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="54.0" />
+      <Button layoutX="810.0" layoutY="79.0" mnemonicParsing="false" onAction="#decrease50" prefHeight="25.0" prefWidth="60.0" text="-50" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="79.0" />
+      <Button layoutX="810.0" layoutY="54.0" mnemonicParsing="false" onAction="#increase100" prefHeight="25.0" prefWidth="60.0" text="+100" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="54.0" />
       <Text layoutX="809.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scale %" textAlignment="CENTER" wrappingWidth="100.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="7.0" />
-      <Text layoutX="810.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shift" textAlignment="CENTER" wrappingWidth="95.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="110.0" />
-      <TextField fx:id="Shift" editable="false" layoutX="809.0" layoutY="130.0" prefHeight="25.0" prefWidth="100.0" text="1" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="130.0" />
-      <Button layoutX="800.0" layoutY="329.0" mnemonicParsing="false" onAction="#RGBChange" prefHeight="25.0" prefWidth="100.0" text="RGBPattern" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="329.0" />
-      <Button layoutX="811.0" layoutY="362.0" mnemonicParsing="false" onAction="#RGBRandom" prefHeight="25.0" prefWidth="100.0" text="RGBRandom" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="362.0" />
-      <Text layoutX="812.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RGB" textAlignment="CENTER" wrappingWidth="95.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="300.0" />
-      <Button layoutX="850.0" layoutY="160.0" mnemonicParsing="false" onAction="#shiftDecrease" prefHeight="25.0" prefWidth="40.0" text="-1" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="160.0" />
-      <Button layoutX="805.0" layoutY="160.0" mnemonicParsing="false" onAction="#shiftIncrease" prefHeight="25.0" prefWidth="40.0" text="+1" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="160.0" />
+      <Button layoutX="798.0" layoutY="141.0" mnemonicParsing="false" onAction="#RGBChange" prefHeight="25.0" prefWidth="100.0" text="RGBPattern" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="141.0" />
+      <Button layoutX="798.0" layoutY="174.0" mnemonicParsing="false" onAction="#RGBRandom" prefHeight="25.0" prefWidth="100.0" text="RGBRandom" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="174.0" />
+      <Text layoutX="801.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RGB" textAlignment="CENTER" wrappingWidth="95.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="112.0" />
    </children>
 </AnchorPane>
